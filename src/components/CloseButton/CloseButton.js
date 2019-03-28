@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { View, Text, TouchableOpacity, Animated } from "react-native";
+import { View, TouchableOpacity, Animated, Image } from "react-native";
 
+import CloseIcon from "./close_icon.png";
 import styles from "./styles";
 
 const AnimatedButton = Animated.createAnimatedComponent(TouchableOpacity);
@@ -19,7 +20,7 @@ const CloseButton = ({ onPress, opacity, ...props }) => (
     {...props}
   >
     <View style={styles.buttonContainer}>
-      <Text style={{ fontSize: 12, fontWeight: "bold" }}>X</Text>
+      <Image source={CloseIcon} style={styles.icon} />
     </View>
   </AnimatedButton>
 );

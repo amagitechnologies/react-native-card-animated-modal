@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export default StyleSheet.create({
   container: {
@@ -16,9 +16,27 @@ export default StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 30,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 1)",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    ...Platform.select({
+      android: {
+        elevation: 3
+      },
+      ios: {
+        shadowColor: "rgb(0, 0, 0)",
+        shadowOpacity: 0.5,
+        shadowOffset: {
+          width: 0,
+          height: 0
+        },
+        shadowRadius: 4
+      }
+    })
+  },
+  icon: {
+    width: 14,
+    height: 14
   }
 });

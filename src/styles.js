@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export default StyleSheet.create({
   safeArea: {
@@ -16,5 +16,23 @@ export default StyleSheet.create({
   },
   scrollViewContentContainer: {
     flexGrow: 1
+  },
+  activeCard: {
+    margin: 0,
+    overflow: "visible",
+    ...Platform.select({
+      android: {
+        elevation: 0
+      },
+      ios: {
+        shadowColor: "rgb(0, 0, 0)",
+        shadowOpacity: 0,
+        shadowOffset: {
+          width: 0,
+          height: 0
+        },
+        shadowRadius: 0
+      }
+    })
   }
 });

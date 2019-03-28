@@ -149,7 +149,7 @@ class Test extends React.Component {
     });
 
     const activeCardBackground = this.animated.interpolate({
-      inputRange: [0, 0.5, 1],
+      inputRange: [0, 0.1, 1],
       outputRange: [
         "rgba(255, 255, 255, 0)",
         "rgba(255, 255, 255, 1)",
@@ -162,8 +162,7 @@ class Test extends React.Component {
       left: this.position.x,
       top: this.position.y,
       borderRadius: activeCardBorderRadius,
-      margin: 0,
-      overflow: "visible"
+      ...styles.activeCard
     };
 
     const closeOpacity = this.animated.interpolate({
@@ -181,12 +180,14 @@ class Test extends React.Component {
     const contentOffsetX = this.animated.interpolate({
       inputRange: [0, 1],
       outputRange: [-5, 0],
+      useNativeDriver: true,
       easing: Easing.bezier(0.025, -0.05, 0.1, -0.1)
     });
 
     const contentOffsetY = this.animated.interpolate({
       inputRange: [0, 1],
       outputRange: [-20, 0],
+      useNativeDriver: true,
       easing: Easing.bezier(0.175, -0.885, 0.32, -1)
     });
 

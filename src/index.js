@@ -117,7 +117,7 @@ class Test extends React.Component {
   keyExtractor = (item, index) => `item-${index}`;
 
   renderItem = ({ item, index }) => {
-    const { renderItem } = this.props;
+    const { renderItem, cardContainerStyle, cardWidth } = this.props;
 
     return (
       <Card
@@ -125,6 +125,8 @@ class Test extends React.Component {
           this.cards[index + 1] = instance;
         }}
         onPress={this.expand(index + 1)}
+        customContainerStyle={cardContainerStyle}
+        cardWidth={cardWidth}
       >
         <CardContent>{renderItem({ item, index })}</CardContent>
       </Card>
@@ -133,7 +135,13 @@ class Test extends React.Component {
 
   render() {
     const { activeCard } = this.state;
-    const { data, renderItem, renderDetails } = this.props;
+    const {
+      data,
+      renderItem,
+      renderDetails,
+      listContainerStyle,
+      safeAreaStyle
+    } = this.props;
 
     const activeCardBorderRadius = this.animated.interpolate({
       inputRange: [0, 0.5, 1],
@@ -196,9 +204,9 @@ class Test extends React.Component {
     };
 
     return (
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={[styles.safeArea, safeAreaStyle]}>
         <FlatList
-          contentContainerStyle={styles.flatlistContainer}
+          contentContainerStyle={[styles.flatlistContainer, listContainerStyle]}
           keyExtractor={this.keyExtractor}
           data={data}
           renderItem={this.renderItem}
@@ -248,11 +256,19 @@ class Test extends React.Component {
 Test.propTypes = {
   data: PropTypes.instanceOf(Array),
   renderItem: PropTypes.func,
-  renderDetails: PropTypes.func
+  renderDetails: PropTypes.func,
+  cardContainerStyle: PropTypes.instanceOf(Object),
+  listContainerStyle: PropTypes.instanceOf(Object),
+  safeAreaStyle: PropTypes.instanceOf(Object),
+  cardWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 Test.defaultProps = {
   data: [],
+  cardWidth: 0,
+  cardContainerStyle: {},
+  listContainerStyle: {},
+  safeAreaStyle: {},
   renderItem: () => null,
   renderDetails: () => null
 };

@@ -11,9 +11,19 @@ class Card extends React.PureComponent {
   };
 
   render() {
-    const { children, customContainerStyle, onPress } = this.props;
+    const { children, customContainerStyle, cardWidth, onPress } = this.props;
 
-    const containerStyle = [styles.container, customContainerStyle];
+    const otherStyles = {};
+
+    if (cardWidth) {
+      otherStyles.width = cardWidth;
+    }
+
+    const containerStyle = [
+      styles.container,
+      customContainerStyle,
+      otherStyles
+    ];
 
     return (
       <TouchableWithoutFeedback onPress={onPress}>
@@ -37,12 +47,14 @@ Card.propTypes = {
     PropTypes.arrayOf(PropTypes.node)
   ]),
   customContainerStyle: PropTypes.instanceOf(Object),
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  cardWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 Card.defaultProps = {
   children: null,
   onPress: null,
+  cardWidth: 0,
   customContainerStyle: {}
 };
 

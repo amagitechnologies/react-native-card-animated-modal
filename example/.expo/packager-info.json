@@ -1,0 +1,9 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 17161,
+  "expoServerNgrokUrl": "https://vp-btm.anonymous.example.exp.direct",
+  "packagerNgrokUrl": "https://packager.vp-btm.anonymous.example.exp.direct",
+  "ngrokPid": 17523
+}

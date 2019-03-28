@@ -7,7 +7,7 @@ import IGIcon from "./assets/ig_icon";
 import CreativeImage from "./assets/creative";
 import IGImage from "./assets/ig_image";
 import FitnessImage from "./assets/fitness_image";
-import UnityImage from "./assets/unity_image";
+import GameImage from "./assets/game_image";
 
 const { height } = Dimensions.get("window");
 
@@ -175,7 +175,49 @@ export default [
   },
   {
     source: {
-      uri: UnityImage
-    }
+      uri: GameImage
+    },
+    renderItem: ({ item }) => (
+      <View
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.7)"
+        }}
+      >
+        <View
+          style={{
+            width: "100%",
+            padding: 16
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 12,
+              marginBottom: 5,
+              fontWeight: "bold",
+              color: "rgba(0, 0, 0, 0.5)"
+            }}
+          >
+            LET&apos;S PLAY
+          </Text>
+          <Text
+            style={{
+              fontSize: 26,
+              maxWidth: "80%",
+              fontWeight: "bold",
+              color: "rgb(51, 51, 51)"
+            }}
+          >
+            Get your nerves in the game
+          </Text>
+        </View>
+        <Image
+          source={item.source}
+          style={{
+            width: "100%",
+            height: height * 0.4
+          }}
+        />
+      </View>
+    )
   }
 ];

@@ -26,7 +26,7 @@ const CloseButton = ({ onPress, opacity, ...props }) => (
 
 CloseButton.propTypes = {
   onPress: PropTypes.func,
-  opacity: PropTypes.instanceOf(Object)
+  opacity: PropTypes.instanceOf(Object).isRequired
 };
 
 CloseButton.defaultProps = {

@@ -1,0 +1,17 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "parser": "babel-eslint",
+  "rules": {
+    "no-underscore-dangle": [2, { "allowAfterThis": true }],
+    "prettier/prettier": ["error"],
+    "react/jsx-filename-extension": "off",
+    "react/prefer-stateless-function": [2, { "ignorePureComponents": true }]
+  },
+  "globals": {
+    "fetch": false
+  },
+  "settings": {
+    "import/core-modules": ["react-native"]
+  }
+}

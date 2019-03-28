@@ -18,7 +18,13 @@ class Card extends React.PureComponent {
     return (
       <TouchableWithoutFeedback onPress={onPress}>
         <Animated.View style={containerStyle}>
-          <View ref={instance => (this.container = instance)}>{children}</View>
+          <View
+            ref={instance => {
+              this.container = instance;
+            }}
+          >
+            {children}
+          </View>
         </Animated.View>
       </TouchableWithoutFeedback>
     );

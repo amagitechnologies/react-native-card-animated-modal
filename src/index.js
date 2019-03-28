@@ -121,7 +121,9 @@ class Test extends React.Component {
 
     return (
       <Card
-        ref={instance => (this.cards[index + 1] = instance)}
+        ref={instance => {
+          this.cards[index + 1] = instance;
+        }}
         onPress={this.expand(index + 1)}
       >
         <CardContent>{renderItem({ item, index })}</CardContent>

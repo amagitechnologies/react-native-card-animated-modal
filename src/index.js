@@ -175,7 +175,8 @@ class Test extends React.Component {
       data,
       renderDetails,
       listContainerStyle,
-      safeAreaStyle
+      safeAreaStyle,
+      listProps
     } = this.props;
 
     const activeCardBorderRadius = this.animated.interpolate({
@@ -184,12 +185,8 @@ class Test extends React.Component {
     });
 
     const activeCardBackground = this.animated.interpolate({
-      inputRange: [0, 0.5, 1],
-      outputRange: [
-        "rgba(255, 255, 255, 0.2)",
-        "rgba(255, 255, 255, 0.85)",
-        "rgba(255, 255, 255, 1)"
-      ]
+      inputRange: [0, 1],
+      outputRange: ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 1)"]
     });
 
     const activeCardStyle = {
@@ -246,6 +243,7 @@ class Test extends React.Component {
           keyExtractor={this.keyExtractor}
           data={data}
           renderItem={this.renderItem}
+          {...listProps}
         />
         <View
           style={styles.ghostViewContainer}
@@ -258,9 +256,7 @@ class Test extends React.Component {
             style={[
               styles.scrollViewContainer,
               {
-                backgroundColor: activeCard
-                  ? activeCardBackground
-                  : "transparent"
+                backgroundColor: activeCardBackground
               }
             ]}
             contentContainerStyle={styles.scrollViewContentContainer}
@@ -294,6 +290,7 @@ Test.propTypes = {
   data: PropTypes.instanceOf(Array),
   renderItem: PropTypes.func,
   renderDetails: PropTypes.func,
+  listProps: PropTypes.instanceOf(Object),
   cardContainerStyle: PropTypes.instanceOf(Object),
   listContainerStyle: PropTypes.instanceOf(Object),
   safeAreaStyle: PropTypes.instanceOf(Object),
@@ -305,6 +302,7 @@ Test.defaultProps = {
   cardWidth: 0,
   cardContainerStyle: {},
   listContainerStyle: {},
+  listProps: {},
   safeAreaStyle: {},
   renderItem: () => null,
   renderDetails: () => null

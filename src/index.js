@@ -20,16 +20,26 @@ class Test extends React.Component {
 
   cards = {};
 
+  clones = {};
+
   dimensions = new Animated.ValueXY({ x: 0, y: 0 });
 
   position = new Animated.ValueXY();
 
   animated = new Animated.Value(0);
 
-  oldPosition = {};
+  detailAnimated = new Animated.Value(0);
+
+  oldPosition = {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  };
 
   expand = activeCard => () => {
     StatusBar.setHidden(true, "slide");
+
     this.cards[activeCard].measure((x, y, width, height, pageX, pageY) => {
       this.oldPosition = {
         x: pageX,
@@ -61,8 +71,7 @@ class Test extends React.Component {
               }),
               Animated.timing(this.position.y, {
                 toValue: dPageY,
-                easing: Easing.bezier(0.175, 0.885, 0.32, 1.275),
-                duration: 450
+                duration: 300
               }),
               Animated.timing(this.dimensions.x, {
                 toValue: dWidth,
@@ -73,7 +82,13 @@ class Test extends React.Component {
                 duration: 300
               }),
               Animated.timing(this.animated, {
-                toValue: 1
+                toValue: 1,
+                duration: 300
+              }),
+              Animated.timing(this.detailAnimated, {
+                toValue: 1,
+                delay: 100,
+                duration: 300
               })
             ]).start();
           });
@@ -104,6 +119,10 @@ class Test extends React.Component {
       Animated.timing(this.animated, {
         toValue: 0,
         duration: 300
+      }),
+      Animated.timing(this.detailAnimated, {
+        toValue: 0,
+        duration: 100
       })
     ]).start(() => {
       StatusBar.setHidden(false, "slide");
@@ -117,7 +136,24 @@ class Test extends React.Component {
   keyExtractor = (item, index) => `item-${index}`;
 
   renderItem = ({ item, index }) => {
+    const { activeCard } = this.state;
     const { renderItem, cardContainerStyle, cardWidth } = this.props;
+
+    const element = React.cloneElement(renderItem({ item, index }));
+    this.clones[index + 1] = element;
+
+    const customContainerStyle = [cardContainerStyle];
+
+    const opacity = this.animated.interpolate({
+      inputRange: [0, 0.01, 1],
+      outputRange: [1, 0.1, 0.1]
+    });
+
+    if (activeCard) {
+      customContainerStyle.push({
+        opacity
+      });
+    }
 
     return (
       <Card
@@ -125,10 +161,10 @@ class Test extends React.Component {
           this.cards[index + 1] = instance;
         }}
         onPress={this.expand(index + 1)}
-        customContainerStyle={cardContainerStyle}
+        customContainerStyle={customContainerStyle}
         cardWidth={cardWidth}
       >
-        <CardContent>{renderItem({ item, index })}</CardContent>
+        <CardContent>{element}</CardContent>
       </Card>
     );
   };
@@ -137,7 +173,6 @@ class Test extends React.Component {
     const { activeCard } = this.state;
     const {
       data,
-      renderItem,
       renderDetails,
       listContainerStyle,
       safeAreaStyle
@@ -149,10 +184,10 @@ class Test extends React.Component {
     });
 
     const activeCardBackground = this.animated.interpolate({
-      inputRange: [0, 0.1, 1],
+      inputRange: [0, 0.5, 1],
       outputRange: [
-        "rgba(255, 255, 255, 0)",
-        "rgba(255, 255, 255, 1)",
+        "rgba(255, 255, 255, 0.2)",
+        "rgba(255, 255, 255, 0.85)",
         "rgba(255, 255, 255, 1)"
       ]
     });
@@ -171,20 +206,20 @@ class Test extends React.Component {
       useNativeDriver: true
     });
 
-    const contentOpacity = this.animated.interpolate({
+    const contentOpacity = this.detailAnimated.interpolate({
       inputRange: [0, 0.5, 1],
-      outputRange: [0, 0.5, 1],
+      outputRange: [0, 0.2, 1],
       useNativeDriver: true
     });
 
-    const contentOffsetX = this.animated.interpolate({
+    const contentOffsetX = this.detailAnimated.interpolate({
       inputRange: [0, 1],
       outputRange: [-5, 0],
       useNativeDriver: true,
       easing: Easing.bezier(0.025, -0.05, 0.1, -0.1)
     });
 
-    const contentOffsetY = this.animated.interpolate({
+    const contentOffsetY = this.detailAnimated.interpolate({
       inputRange: [0, 1],
       outputRange: [-20, 0],
       useNativeDriver: true,
@@ -223,7 +258,9 @@ class Test extends React.Component {
             style={[
               styles.scrollViewContainer,
               {
-                backgroundColor: activeCardBackground
+                backgroundColor: activeCard
+                  ? activeCardBackground
+                  : "transparent"
               }
             ]}
             contentContainerStyle={styles.scrollViewContentContainer}
@@ -236,8 +273,7 @@ class Test extends React.Component {
                   borderRadius: activeCardBorderRadius
                 }}
               >
-                {(activeCard && renderItem({ item: data[activeCard - 1] })) ||
-                  null}
+                {this.clones[activeCard] || null}
               </CardContent>
             </Card>
             <Animated.View style={activeDetailsStyle}>

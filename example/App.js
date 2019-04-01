@@ -7,11 +7,27 @@ import { Dimensions, Image, Text, View } from "react-native";
 import CARDS from "./cards";
 
 const { height } = Dimensions.get("window");
+const now = new Date();
 
 export default class App extends React.Component {
   render() {
     return (
       <CardList
+        listProps={{
+          ListHeaderComponent: () => (
+            <View style={{ padding: 16, paddingBottom: 0 }}>
+              <Text
+                style={{
+                  fontSize: 13,
+                  color: "rgba(0, 0, 0, 0.5)"
+                }}
+              >
+                {now.toDateString()}
+              </Text>
+              <Text style={{ fontSize: 32, fontWeight: "bold" }}>Featured</Text>
+            </View>
+          )
+        }}
         data={CARDS}
         renderItem={({ item }) => {
           if (item.renderItem) return item.renderItem({ item });

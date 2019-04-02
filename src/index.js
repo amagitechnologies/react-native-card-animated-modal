@@ -176,7 +176,10 @@ class Test extends React.Component {
       renderDetails,
       listContainerStyle,
       safeAreaStyle,
-      listProps
+      listProps,
+      header,
+      footer,
+      ListComponent
     } = this.props;
 
     const activeCardBorderRadius = this.animated.interpolate({
@@ -238,13 +241,15 @@ class Test extends React.Component {
 
     return (
       <SafeAreaView style={[styles.safeArea, safeAreaStyle]}>
-        <FlatList
+        {header}
+        <ListComponent
           contentContainerStyle={[styles.flatlistContainer, listContainerStyle]}
           keyExtractor={this.keyExtractor}
           data={data}
           renderItem={this.renderItem}
           {...listProps}
         />
+        {footer}
         <View
           style={styles.ghostViewContainer}
           pointerEvents={activeCard ? "auto" : "none"}
@@ -294,7 +299,10 @@ Test.propTypes = {
   cardContainerStyle: PropTypes.instanceOf(Object),
   listContainerStyle: PropTypes.instanceOf(Object),
   safeAreaStyle: PropTypes.instanceOf(Object),
-  cardWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  cardWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  ListComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  header: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
+  footer: PropTypes.oneOfType([PropTypes.element, PropTypes.node])
 };
 
 Test.defaultProps = {
@@ -305,7 +313,10 @@ Test.defaultProps = {
   listProps: {},
   safeAreaStyle: {},
   renderItem: () => null,
-  renderDetails: () => null
+  renderDetails: () => null,
+  ListComponent: FlatList,
+  header: null,
+  footer: null
 };
 
 export default Test;

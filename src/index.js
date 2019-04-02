@@ -67,19 +67,19 @@ class Test extends React.Component {
         () => {
           this.ghostView.measure((dx, dy, dWidth, dHeight, dPageX, dPageY) => {
             Animated.parallel([
-              Animated.timing(this.position.x, {
+              Animated.spring(this.position.x, {
                 toValue: dPageX,
                 duration: 300
               }),
-              Animated.timing(this.position.y, {
+              Animated.spring(this.position.y, {
                 toValue: dPageY,
                 duration: 300
               }),
-              Animated.timing(this.dimensions.x, {
+              Animated.spring(this.dimensions.x, {
                 toValue: dWidth,
                 duration: 300
               }),
-              Animated.timing(this.dimensions.y, {
+              Animated.spring(this.dimensions.y, {
                 toValue: dHeight,
                 duration: 300
               }),
@@ -211,27 +211,23 @@ class Test extends React.Component {
 
     const closeOpacity = this.animated.interpolate({
       inputRange: [0, 0.75, 1],
-      outputRange: [0, 0, 1],
-      useNativeDriver: true
+      outputRange: [0, 0, 1]
     });
 
     const contentOpacity = this.detailAnimated.interpolate({
       inputRange: [0, 0.5, 1],
-      outputRange: [0, 0.2, 1],
-      useNativeDriver: true
+      outputRange: [0, 0.2, 1]
     });
 
     const contentOffsetX = this.detailAnimated.interpolate({
       inputRange: [0, 1],
       outputRange: [-5, 0],
-      useNativeDriver: true,
       easing: Easing.bezier(0.025, -0.05, 0.1, -0.1)
     });
 
     const contentOffsetY = this.detailAnimated.interpolate({
       inputRange: [0, 1],
       outputRange: [-20, 0],
-      useNativeDriver: true,
       easing: Easing.bezier(0.175, -0.885, 0.32, -1)
     });
 

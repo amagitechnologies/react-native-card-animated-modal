@@ -22,7 +22,7 @@ export default [
           source={item.source}
           style={{
             width: "100%",
-            height: height * 0.6
+            height: height * 0.5
           }}
         />
         <View

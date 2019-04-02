@@ -15,7 +15,8 @@ import styles from "./styles";
 
 class Test extends React.Component {
   state = {
-    activeCard: 0
+    activeCard: 0,
+    scrollEnabled: false
   };
 
   cards = {};
@@ -60,7 +61,8 @@ class Test extends React.Component {
 
       this.setState(
         {
-          activeCard
+          activeCard,
+          scrollEnabled: true
         },
         () => {
           this.ghostView.measure((dx, dy, dWidth, dHeight, dPageX, dPageY) => {
@@ -98,39 +100,46 @@ class Test extends React.Component {
   };
 
   shrink = () => {
-    Animated.parallel([
-      Animated.timing(this.position.x, {
-        toValue: this.oldPosition.x,
-        duration: 300
-      }),
-      Animated.timing(this.position.y, {
-        toValue: this.oldPosition.y,
-        easing: Easing.bezier(0.175, 0.885, 0.32, 1.275),
-        duration: 300
-      }),
-      Animated.timing(this.dimensions.x, {
-        toValue: this.oldPosition.width,
-        duration: 300
-      }),
-      Animated.timing(this.dimensions.y, {
-        toValue: this.oldPosition.height,
-        duration: 300
-      }),
-      Animated.timing(this.animated, {
-        toValue: 0,
-        duration: 300
-      }),
-      Animated.timing(this.detailAnimated, {
-        toValue: 0,
-        duration: 100
-      })
-    ]).start(() => {
-      StatusBar.setHidden(false, "slide");
+    this.setState(
+      {
+        scrollEnabled: false
+      },
+      () => {
+        Animated.parallel([
+          Animated.timing(this.position.x, {
+            toValue: this.oldPosition.x,
+            duration: 300
+          }),
+          Animated.timing(this.position.y, {
+            toValue: this.oldPosition.y,
+            easing: Easing.bezier(0.175, 0.885, 0.32, 1.275),
+            duration: 300
+          }),
+          Animated.timing(this.dimensions.x, {
+            toValue: this.oldPosition.width,
+            duration: 300
+          }),
+          Animated.timing(this.dimensions.y, {
+            toValue: this.oldPosition.height,
+            duration: 300
+          }),
+          Animated.timing(this.animated, {
+            toValue: 0,
+            duration: 300
+          }),
+          Animated.timing(this.detailAnimated, {
+            toValue: 0,
+            duration: 100
+          })
+        ]).start(() => {
+          StatusBar.setHidden(false, "slide");
 
-      this.setState({
-        activeCard: 0
-      });
-    });
+          this.setState({
+            activeCard: 0
+          });
+        });
+      }
+    );
   };
 
   keyExtractor = (item, index) => `item-${index}`;
@@ -170,7 +179,7 @@ class Test extends React.Component {
   };
 
   render() {
-    const { activeCard } = this.state;
+    const { activeCard, scrollEnabled } = this.state;
     const {
       data,
       renderDetails,
@@ -258,6 +267,7 @@ class Test extends React.Component {
           }}
         >
           <Animated.ScrollView
+            scrollEnabled={scrollEnabled}
             style={[
               styles.scrollViewContainer,
               {

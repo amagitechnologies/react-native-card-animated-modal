@@ -11,12 +11,22 @@ class Card extends React.PureComponent {
   };
 
   render() {
-    const { children, customContainerStyle, cardWidth, onPress } = this.props;
+    const {
+      children,
+      customContainerStyle,
+      cardWidth,
+      cardHeight,
+      onPress
+    } = this.props;
 
     const otherStyles = {};
 
     if (cardWidth) {
       otherStyles.width = cardWidth;
+    }
+
+    if (cardHeight) {
+      otherStyles.height = cardHeight;
     }
 
     const containerStyle = [
@@ -32,6 +42,7 @@ class Card extends React.PureComponent {
             ref={instance => {
               this.container = instance;
             }}
+            style={styles.childrenContainer}
           >
             {children}
           </View>
@@ -48,13 +59,15 @@ Card.propTypes = {
   ]),
   customContainerStyle: PropTypes.instanceOf(Object),
   onPress: PropTypes.func,
-  cardWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  cardWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  cardHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 Card.defaultProps = {
   children: null,
   onPress: null,
   cardWidth: 0,
+  cardHeight: 0,
   customContainerStyle: {}
 };
 

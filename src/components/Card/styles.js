@@ -1,6 +1,6 @@
 import { StyleSheet, Platform, Dimensions } from "react-native";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
   container: {
@@ -21,6 +21,11 @@ export default StyleSheet.create({
         },
         shadowRadius: 10
       }
-    })
+    }),
+    minHeight: height * 0.5,
+    maxHeight: height * 0.85
+  },
+  childrenContainer: {
+    flex: 1
   }
 });

@@ -7,7 +7,8 @@ import {
   Animated,
   Easing,
   FlatList,
-  StatusBar
+  StatusBar,
+  Image
 } from "react-native";
 import { Card, CardContent, CloseButton, DetailsContent } from "./components";
 
@@ -172,8 +173,12 @@ class Test extends React.Component {
         onPress={this.expand(index + 1)}
         customContainerStyle={customContainerStyle}
         cardWidth={cardWidth}
+        cardHeight={item.height}
       >
-        <CardContent>{element}</CardContent>
+        <CardContent>
+          <Image source={item.image} style={styles.image} resizeMode="cover" />
+          {element}
+        </CardContent>
       </Card>
     );
   };
@@ -273,13 +278,21 @@ class Test extends React.Component {
             contentContainerStyle={styles.scrollViewContentContainer}
             pointerEvents={activeCard ? "auto" : "none"}
           >
-            <Card customContainerStyle={[activeCardStyle]}>
+            <Card
+              cardHeight={activeCard ? data[activeCard - 1].height : null}
+              customContainerStyle={[activeCardStyle]}
+            >
               <CloseButton onPress={this.shrink} opacity={closeOpacity} />
               <CardContent
                 customContainerStyle={{
                   borderRadius: activeCardBorderRadius
                 }}
               >
+                <Image
+                  source={activeCard ? data[activeCard - 1].image : null}
+                  style={styles.image}
+                  resizeMode="cover"
+                />
                 {this.clones[activeCard] || null}
               </CardContent>
             </Card>

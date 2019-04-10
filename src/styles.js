@@ -34,5 +34,11 @@ export default StyleSheet.create({
         shadowRadius: 0
       }
     })
+  },
+  image: {
+    flex: 1,
+    alignSelf: "stretch",
+    width: undefined,
+    height: undefined
   }
 });

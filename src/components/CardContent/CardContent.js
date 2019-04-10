@@ -5,7 +5,10 @@ import { Animated } from "react-native";
 
 const CardContent = ({ customContainerStyle, children }) => (
   <Animated.View
-    style={[{ overflow: "hidden", borderRadius: 20 }, customContainerStyle]}
+    style={[
+      { overflow: "hidden", borderRadius: 20, flex: 1 },
+      customContainerStyle
+    ]}
   >
     {children}
   </Animated.View>

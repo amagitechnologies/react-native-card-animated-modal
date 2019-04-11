@@ -3,9 +3,19 @@
   "version": "1.0.0",
   "description": "An animated modal from a card item.",
   "main": "src/index.js",
-  "author": "Archie Herbias <archie.herbias@gmail.com>",
+  "author": "amagitechnologies",
+  "repository": "amagitechnologies/react-native-card-animated-modal",
   "license": "MIT",
   "private": false,
+  "keywords": [
+    "react",
+    "react-native",
+    "native",
+    "animated",
+    "card",
+    "modal",
+    "card-modal"
+  ],
   "dependencies": {
     "prop-types": "^15.7.2"
   },

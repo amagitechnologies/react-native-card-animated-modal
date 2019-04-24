@@ -135,4 +135,4 @@ const App = () => (
 
 #### License
 
-MIT © [amagitechnologies](https://github.com/amagitechnologies)
+MIT © [AMAGI](https://amagi.io)

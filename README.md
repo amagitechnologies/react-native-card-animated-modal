@@ -20,7 +20,7 @@ yarn add react-native-card-animated-modal
 
 #### Example Output
 
-![](https://raw.githubusercontent.com/amagitechnologies/react-native-card-animated-modal/master/assets/demo.gif)
+![](assets/demo.gif)
 
 #### Example
 

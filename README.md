@@ -126,6 +126,9 @@ const App = () => (
 | renderDetails      | optional                        | `() => null`                                           | Function that takes `({ item, index })` that will be used to render details in the bottom of each card when expanded. |
 | listProps          | optional                        | {}                                                     | Props that will be applied to the list component.                                                                     |
 | cardContainerStyle | optional                        | {}                                                     | Styling property that will be applied to the cards.                                                                   |
+| detailsContainerStyle | optional                     | {}
+        | Styling property that will be applied to the details area of the expanded card.
+                        |
 | listContainerStyle | optional                        | `{flexGrow: 1, backgroundColor: "rgb(250, 250, 250)"}` | Styling property that will be applied to the contentContainerStyle of list component                                  |
 | safeAreaStyle      | optional                        | `{ flex: 1 }`                                          | Styling property that will be applied to the container which is `SafeAreaView`                                        |
 | cardWidth          | optional                        | Device Width - 32                                      | The width of the cards.                                                                                               |

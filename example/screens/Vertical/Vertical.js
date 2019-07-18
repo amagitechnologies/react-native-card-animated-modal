@@ -29,6 +29,7 @@ export default class Vertical extends React.Component {
           )
         }}
         data={CARDS}
+        detailsContainerStyle={{ borderRadius: 0 }}
         renderItem={({ item }) => {
           if (item.renderItem) return item.renderItem({ item });
 
@@ -43,7 +44,12 @@ export default class Vertical extends React.Component {
           );
         }}
         renderDetails={() => (
-          <View style={{ paddingVertical: 30, paddingHorizontal: 16 }}>
+          <View
+            style={{
+              paddingVertical: 30,
+              paddingHorizontal: 16
+            }}
+          >
             <Text style={{ color: "rgba(0, 0, 0, 0.7)", fontSize: 18 }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

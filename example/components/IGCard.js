@@ -48,6 +48,9 @@ export default () => (
               minWidth: 60,
               borderRadius: 16
             }}
+            onPress={() => {
+              console.log("IG Card");
+            }}
           >
             <Text style={{ color: "rgb(255, 255, 255)", textAlign: "center" }}>
               GET

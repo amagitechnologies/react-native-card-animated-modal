@@ -189,6 +189,7 @@ class Test extends React.Component {
       data,
       renderDetails,
       listContainerStyle,
+      detailsContainerStyle,
       safeAreaStyle,
       listProps,
       header,
@@ -297,7 +298,7 @@ class Test extends React.Component {
               </CardContent>
             </Card>
             <Animated.View style={activeDetailsStyle}>
-              <DetailsContent>
+              <DetailsContent customContainerStyle={detailsContainerStyle}>
                 {(activeCard &&
                   renderDetails({ item: data[activeCard - 1] })) ||
                   null}
@@ -316,6 +317,7 @@ Test.propTypes = {
   renderDetails: PropTypes.func,
   listProps: PropTypes.instanceOf(Object),
   cardContainerStyle: PropTypes.instanceOf(Object),
+  detailsContainerStyle: PropTypes.instanceOf(Object),
   listContainerStyle: PropTypes.instanceOf(Object),
   safeAreaStyle: PropTypes.instanceOf(Object),
   cardWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -328,6 +330,7 @@ Test.defaultProps = {
   data: [],
   cardWidth: 0,
   cardContainerStyle: {},
+  detailsContainerStyle: {},
   listContainerStyle: {},
   listProps: {},
   safeAreaStyle: {},

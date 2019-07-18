@@ -39,6 +39,7 @@ class Card extends React.PureComponent {
       <TouchableWithoutFeedback onPress={onPress}>
         <Animated.View style={containerStyle}>
           <View
+            renderToHardwareTextureAndroid={true}
             ref={instance => {
               this.container = instance;
             }}
